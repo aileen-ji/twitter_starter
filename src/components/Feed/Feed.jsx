@@ -8,7 +8,7 @@ export default function Feed(props) {
     <div className="col feed">
       {/* UPDATE TWEET BOX PROPS HERE */}
       <TweetBox setTweets={props.setTweets} userProfile={props.userProfile} tweets={props.tweets} 
-      tweetText={props.tweetText} setTweetText={props.setTweetText} disable={props.disable} setDisable={props.setDisable}/>
+      tweetText={props.tweetText} setTweetText={props.setTweetText}/>
 
       <div className="see-new-tweets beet">
         <p>

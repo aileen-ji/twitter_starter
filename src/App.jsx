@@ -11,15 +11,13 @@ export default function App() {
   let arr = new Array(firstTweet)
   let [tweets, setTweets] = useState(arr)
   let [tweetText, setTweetText] = useState("")
-  let [disable, setDisable] = useState(true)
 
   return (
     <div className="app">
       <Navbar navLinks={navLinks}/>
       <main>
         <UserProfile userProfile={userProfile} setUserProfile={setUserProfile}/>
-        <Feed tweets={tweets} setTweets={setTweets} userProfile={userProfile} tweetText={tweetText} setTweetText={setTweetText}
-        disable={disable} setDisable={setDisable}/>
+        <Feed tweets={tweets} setTweets={setTweets} userProfile={userProfile} tweetText={tweetText} setTweetText={setTweetText}/>
         <Advertisements />
       </main>
     </div>

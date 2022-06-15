@@ -5,15 +5,9 @@ import "./TweetBox.css"
 export default function TweetBox(props) {
   const handleOnTweetTextChange = (event) => {
     props.setTweetText(event.target.value)
-    props.setDisable(false)
-    if(event.target.value.length > 140){
-      props.setDisable(true)
-    }
-  }
-
-  const handleDisable = (event) => {
     
   }
+
 
   const handleOnSubmit = () => {
     let newTweet = {
@@ -25,9 +19,6 @@ export default function TweetBox(props) {
       likes:0,
       id:props.tweets.length
     }
-    if(!props.tweetText){
-      props.setDisable(true)
-    }
     props.setTweets(state => [...state, newTweet])
     props.setTweetText("")
   }
@@ -38,8 +29,8 @@ export default function TweetBox(props) {
 
       <div className="tweet-box-footer">
         <TweetBoxIcons />
-        <TweetCharacterCount tweetText={props.tweetText}  handleOnChange={handleOnTweetTextChange}/>
-        <TweetSubmitButton handleOnSubmit={handleOnSubmit} disable={props.disable}/>
+        <TweetCharacterCount tweetText={props.tweetText}/>
+        <TweetSubmitButton handleOnSubmit={handleOnSubmit} tweetText={props.tweetText}/>
       </div>
     </div>
   )
@@ -57,14 +48,25 @@ export function TweetBoxIcons() {
 }
 
 export function TweetCharacterCount(props) {
-  return <span class="tweet-length" onChange={props.handleOnChange}>{props.tweetText.length}</span>
+  let inner = 140 - props.tweetText.length
+  if(!props.tweetText){
+    inner = null
+  }
+  let classVar = "tweet-length"
+  if(props.tweetText.length > 140){
+    classVar = "tweet-length red"
+  }
+  return (
+    <span className={classVar}>{inner}</span>
+  )
+  
 }
 
 export function TweetSubmitButton(props) {
   return (
     <div className="tweet-submit">
       <i className="fas fa-plus-circle"></i>
-      <button className="tweet-submit-button" onClick={props.handleOnSubmit} disabled={props.disable}>Tweet</button>
+      <button className="tweet-submit-button" disabled={(!props.tweetText) || (props.tweetText.length > 140)} onClick={props.handleOnSubmit}>Tweet</button>
     </div>
   )
 }
